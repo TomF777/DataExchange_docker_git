@@ -1,0 +1,4549 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_OI01-GLOBAL-INFLUX",
+      "label": "OI01-Global-Influx",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "influxdb",
+      "pluginName": "InfluxDB"
+    },
+    {
+      "name": "VAR_PROCESS_BUCKET",
+      "type": "constant",
+      "label": "Process_Bucket",
+      "value": "PPSL1",
+      "description": ""
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "bargauge",
+      "name": "Bar gauge",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "9.5.14"
+    },
+    {
+      "type": "datasource",
+      "id": "influxdb",
+      "name": "InfluxDB",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": true,
+      "keepTime": true,
+      "tags": [
+        "PPSL1_Main"
+      ],
+      "targetBlank": false,
+      "title": "PPSL1_Main",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    },
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": true,
+      "keepTime": true,
+      "tags": [
+        "PPSL1_Actuators"
+      ],
+      "targetBlank": false,
+      "title": "PPSL1_Actuators",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    },
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": true,
+      "keepTime": true,
+      "tags": [
+        "PPSL1_Vibrations"
+      ],
+      "targetBlank": false,
+      "title": "PPSL1_Vibrations",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    },
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": true,
+      "keepTime": true,
+      "tags": [
+        "PPSL1_CompressedAir"
+      ],
+      "targetBlank": false,
+      "title": "PPSL1_CompressedAir",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    }
+  ],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 6,
+      "panels": [],
+      "title": "BC1 - Rotary Table",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_OI01-GLOBAL-INFLUX}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "stepAfter",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 17,
+        "x": 0,
+        "y": 1
+      },
+      "id": 2,
+      "maxDataPoints": 100000000,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.2.5",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "query": "from(bucket: \"${Process_Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ElectricalMeasurement\")\r\n  |> filter(fn: (r) => r[\"SensorName\"] == \"BC1\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"DriveState\")\r\n\r\n  //|> map(fn: (r) => ( { r with DriveStatus: if r._value == \"Running\" then 1\r\n  //                                          else if r._value == \"Stopped\" then 0\r\n   //                                         else\r\n   //                                             0\r\n   //                     })  )",
+          "refId": "A"
+        }
+      ],
+      "title": "Drive Status",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_OI01-GLOBAL-INFLUX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "max": 10,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 14,
+        "w": 7,
+        "x": 17,
+        "y": 1
+      },
+      "id": 21,
+      "maxDataPoints": 100000000,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ElectricalMeasurement\")\r\n  |> filter(fn: (r) => r[\"SensorName\"] == \"BC1\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"CurrentAssymetry\")\r\n  |> aggregateWindow(every: 10ms, fn: last, createEmpty: false)\r\n  //|> yield(name: \"raw\")\r\n  |> movingAverage(n: 10)\r\n  |> yield(name: \"avarage\")\r\n",
+          "refId": "A"
+        }
+      ],
+      "title": "Current Assymetry [%]",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_OI01-GLOBAL-INFLUX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "L1_Current BC1"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 17,
+        "x": 0,
+        "y": 7
+      },
+      "id": 3,
+      "maxDataPoints": 100000000,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ElectricalMeasurement\")\r\n  |> filter(fn: (r) => r[\"SensorName\"] == \"BC1\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"L1_Current\" or  r[\"_field\"] == \"L2_Current\" or r[\"_field\"] == \"L3_Current\")\r\n  |> aggregateWindow(every: 10ms, fn: mean, createEmpty: false)\r\n  //|> yield(name:\"mean\")\r\n\r\n",
+          "refId": "A"
+        }
+      ],
+      "title": "Current [A]",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_OI01-GLOBAL-INFLUX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "max": 300,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 17,
+        "x": 0,
+        "y": 15
+      },
+      "id": 22,
+      "maxDataPoints": 100000000,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ElectricalMeasurement\")\r\n  |> filter(fn: (r) => r[\"SensorName\"] == \"BC1\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"L1_CurrIntegral\" or r[\"_field\"] == \"L2_CurrIntegral\" or r[\"_field\"] == \"L3_CurrIntegral\" )\r\n\r\n",
+          "refId": "A"
+        }
+      ],
+      "title": "Current Integral",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_OI01-GLOBAL-INFLUX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 20
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 7,
+        "x": 17,
+        "y": 15
+      },
+      "id": 34,
+      "maxDataPoints": 100000000,
+      "options": {
+        "displayMode": "basic",
+        "minVizHeight": 0,
+        "minVizWidth": 0,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {
+          "valueSize": 20
+        },
+        "valueMode": "color"
+      },
+      "pluginVersion": "9.5.14",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC1\")\r\n  |> filter(fn: (r) => r._field == \"L1_CurrIntegral_Anomaly\")\r\n  \r\n |> reduce(\r\n             fn: (r, accumulator) => ( {\r\n                                        sum_anom: r._value + accumulator.sum_anom, \r\n                                        count_anom: accumulator.count_anom + 1,\r\n                                        ratio:  100.0 * float(v: r._value + accumulator.sum_anom ) / float (v: accumulator.count_anom + 1 ),\r\n                                        } ),\r\n             identity: {sum_anom: 0.0 , count_anom: 0, ratio: 0.0},\r\n  )\r\n\r\n|> drop (columns: [\"sum_anom\" , \"count_anom\"] )",
+          "refId": "A"
+        }
+      ],
+      "title": "Anomaly ratio - Current Integral Phase L1",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_OI01-GLOBAL-INFLUX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 20
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 7,
+        "x": 17,
+        "y": 17
+      },
+      "id": 56,
+      "maxDataPoints": 100000000,
+      "options": {
+        "displayMode": "basic",
+        "minVizHeight": 0,
+        "minVizWidth": 0,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {
+          "valueSize": 20
+        },
+        "valueMode": "color"
+      },
+      "pluginVersion": "9.5.14",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC1\")\r\n  |> filter(fn: (r) => r._field == \"L2_CurrIntegral_Anomaly\")\r\n  \r\n |> reduce(\r\n             fn: (r, accumulator) => ( {\r\n                                        sum_anom: r._value + accumulator.sum_anom, \r\n                                        count_anom: accumulator.count_anom + 1,\r\n                                        ratio:  100.0 * float(v: r._value + accumulator.sum_anom ) / float (v: accumulator.count_anom + 1 ),\r\n                                        } ),\r\n             identity: {sum_anom: 0.0 , count_anom: 0, ratio: 0.0},\r\n  )\r\n\r\n|> drop (columns: [\"sum_anom\" , \"count_anom\"] )",
+          "refId": "A"
+        }
+      ],
+      "title": "Anomaly ratio - Current Integral Phase L2",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_OI01-GLOBAL-INFLUX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 20
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 7,
+        "x": 17,
+        "y": 19
+      },
+      "id": 57,
+      "maxDataPoints": 100000000,
+      "options": {
+        "displayMode": "basic",
+        "minVizHeight": 0,
+        "minVizWidth": 0,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {
+          "valueSize": 20
+        },
+        "valueMode": "color"
+      },
+      "pluginVersion": "9.5.14",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC1\")\r\n  |> filter(fn: (r) => r._field == \"L3_CurrIntegral_Anomaly\")\r\n  \r\n |> reduce(\r\n             fn: (r, accumulator) => ( {\r\n                                        sum_anom: r._value + accumulator.sum_anom, \r\n                                        count_anom: accumulator.count_anom + 1,\r\n                                        ratio:  100.0 * float(v: r._value + accumulator.sum_anom ) / float (v: accumulator.count_anom + 1 ),\r\n                                        } ),\r\n             identity: {sum_anom: 0.0 , count_anom: 0, ratio: 0.0},\r\n  )\r\n\r\n|> drop (columns: [\"sum_anom\" , \"count_anom\"] )",
+          "refId": "A"
+        }
+      ],
+      "title": "Anomaly ratio - Current Integral Phase L3",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_OI01-GLOBAL-INFLUX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 100,
+            "axisSoftMin": 0,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "A"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "L1"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "L2"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "C"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "L3"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 7,
+        "x": 17,
+        "y": 21
+      },
+      "id": 67,
+      "maxDataPoints": 100000000,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC1\")\r\n  |> filter(fn: (r) => r._field == \"L1_CurrIntegral_AnomalyRatio\"  ) \r\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n\r\n  |> map (fn: (r) =>  ( { r with anomalyPercent: r.L1_CurrIntegral_AnomalyRatio * 100.0 } )  )\r\n  |> drop(columns: [\"L1_CurrIntegral_AnomalyRatio\"])\r\n\r\n\r\n\r\n\r\n  ",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC1\")\r\n  |> filter(fn: (r) => r._field == \"L2_CurrIntegral_AnomalyRatio\" ) \r\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n\r\n  |> map (fn: (r) =>  ( { r with anomalyPercent: r.L2_CurrIntegral_AnomalyRatio * 100.0 } )  )\r\n  |> drop(columns: [\"L2_CurrIntegral_AnomalyRatio\"])",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC1\")\r\n  |> filter(fn: (r) => r._field == \"L3_CurrIntegral_AnomalyRatio\" ) \r\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n\r\n  |> map (fn: (r) =>  ( { r with anomalyPercent: r.L3_CurrIntegral_AnomalyRatio * 100.0 } )  )\r\n  |> drop(columns: [\"L3_CurrIntegral_AnomalyRatio\"])",
+          "refId": "C"
+        }
+      ],
+      "title": "Anomaly trend  [%] - Current Integral",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_OI01-GLOBAL-INFLUX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "max": 15,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 17,
+        "x": 0,
+        "y": 28
+      },
+      "id": 23,
+      "maxDataPoints": 100000000,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ElectricalMeasurement\")\r\n  |> filter(fn: (r) => r[\"SensorName\"] == \"BC1\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"L1_InrushCurr\" or r[\"_field\"] == \"L2_InrushCurr\" or r[\"_field\"] == \"L3_InrushCurr\" )\r\n\r\n",
+          "refId": "A"
+        }
+      ],
+      "title": "Inrush Current [A]",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_OI01-GLOBAL-INFLUX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 20
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 7,
+        "x": 17,
+        "y": 28
+      },
+      "id": 35,
+      "maxDataPoints": 100000000,
+      "options": {
+        "displayMode": "basic",
+        "minVizHeight": 0,
+        "minVizWidth": 0,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {
+          "valueSize": 20
+        }
+      },
+      "pluginVersion": "9.2.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC1\")\r\n  |> filter(fn: (r) => r._field == \"L1_InrushCurr_Anomaly\")\r\n  \r\n |> reduce(\r\n             fn: (r, accumulator) => ( {\r\n                                        sum_anom: r._value + accumulator.sum_anom, \r\n                                        count_anom: accumulator.count_anom + 1,\r\n                                        ratio:  100.0 * float(v: r._value + accumulator.sum_anom ) / float (v: accumulator.count_anom + 1 ),\r\n                                        } ),\r\n             identity: {sum_anom: 0.0 , count_anom: 0, ratio: 0.0},\r\n  )\r\n\r\n|> drop (columns: [\"sum_anom\" , \"count_anom\"] )",
+          "refId": "A"
+        }
+      ],
+      "title": "Anomaly ratio - Inrush  Current Phase L1",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_OI01-GLOBAL-INFLUX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 20
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 7,
+        "x": 17,
+        "y": 30
+      },
+      "id": 54,
+      "maxDataPoints": 100000000,
+      "options": {
+        "displayMode": "basic",
+        "minVizHeight": 0,
+        "minVizWidth": 0,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {
+          "valueSize": 20
+        }
+      },
+      "pluginVersion": "9.2.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC1\")\r\n  |> filter(fn: (r) => r._field == \"L2_InrushCurr_Anomaly\")\r\n  \r\n |> reduce(\r\n             fn: (r, accumulator) => ( {\r\n                                        sum_anom: r._value + accumulator.sum_anom, \r\n                                        count_anom: accumulator.count_anom + 1,\r\n                                        ratio:  100.0 * float(v: r._value + accumulator.sum_anom ) / float (v: accumulator.count_anom + 1 ),\r\n                                        } ),\r\n             identity: {sum_anom: 0.0 , count_anom: 0, ratio: 0.0},\r\n  )\r\n\r\n|> drop (columns: [\"sum_anom\" , \"count_anom\"] )",
+          "refId": "A"
+        }
+      ],
+      "title": "Anomaly ratio - Inrush  Current Phase L2",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_OI01-GLOBAL-INFLUX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 20
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 7,
+        "x": 17,
+        "y": 32
+      },
+      "id": 55,
+      "options": {
+        "displayMode": "basic",
+        "minVizHeight": 0,
+        "minVizWidth": 0,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {
+          "valueSize": 20
+        }
+      },
+      "pluginVersion": "9.2.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC1\")\r\n  |> filter(fn: (r) => r._field == \"L3_InrushCurr_Anomaly\")\r\n  \r\n |> reduce(\r\n             fn: (r, accumulator) => ( {\r\n                                        sum_anom: r._value + accumulator.sum_anom, \r\n                                        count_anom: accumulator.count_anom + 1,\r\n                                        ratio:  100.0 * float(v: r._value + accumulator.sum_anom ) / float (v: accumulator.count_anom + 1 ),\r\n                                        } ),\r\n             identity: {sum_anom: 0.0 , count_anom: 0, ratio: 0.0},\r\n  )\r\n\r\n|> drop (columns: [\"sum_anom\" , \"count_anom\"] )",
+          "refId": "A"
+        }
+      ],
+      "title": "Anomaly ratio - Inrush  Current Phase L3",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_OI01-GLOBAL-INFLUX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 100,
+            "axisSoftMin": 0,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "A"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "L1"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "L2"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "C"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "L3"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 7,
+        "x": 17,
+        "y": 34
+      },
+      "id": 68,
+      "maxDataPoints": 100000000,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC1\")\r\n  |> filter(fn: (r) => r._field == \"L1_InrushCurr_AnomalyRatio\" ) \r\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n\r\n  |> map (fn: (r) =>  ( { r with anomalyPercent: r.L1_InrushCurr_AnomalyRatio * 100.0 } )  )\r\n  |> drop(columns: [\"L1_InrushCurr_AnomalyRatio\"])\r\n\r\n\r\n\r\n\r\n  ",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC1\")\r\n  |> filter(fn: (r) => r._field == \"L2_InrushCurr_AnomalyRatio\" ) \r\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n\r\n  |> map (fn: (r) =>  ( { r with anomalyPercent: r.L2_InrushCurr_AnomalyRatio * 100.0 } )  )\r\n  |> drop(columns: [\"L2_InrushCurr_AnomalyRatio\"])",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC1\")\r\n  |> filter(fn: (r) => r._field == \"L3_InrushCurr_AnomalyRatio\" ) \r\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n\r\n  |> map (fn: (r) =>  ( { r with anomalyPercent: r.L3_InrushCurr_AnomalyRatio * 100.0 } )  )\r\n  |> drop(columns: [\"L3_InrushCurr_AnomalyRatio\"])",
+          "refId": "C"
+        }
+      ],
+      "title": "Anomaly trend  [%] - Inrush current",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_OI01-GLOBAL-INFLUX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "L1_ActPower BC1",
+                  "L2_ActPower BC1",
+                  "L3_ActPower BC1"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 17,
+        "x": 0,
+        "y": 40
+      },
+      "id": 4,
+      "maxDataPoints": 100000000,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ElectricalMeasurement\")\r\n  |> filter(fn: (r) => r[\"SensorName\"] == \"BC1\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"L1_ActPower\" or r[\"_field\"] == \"L2_ActPower\" or r[\"_field\"] == \"L3_ActPower\" or\r\n  r[\"_field\"] == \"L1_ApparPower\" or r[\"_field\"] == \"L2_ApparPower\" or r[\"_field\"] == \"L3_ApparPower\" or\r\n  r[\"_field\"] == \"L1_ReactPower\" or r[\"_field\"] == \"L2_ReactPower\" or r[\"_field\"] == \"L3_ReactPower\" )\r\n\r\n",
+          "refId": "A"
+        }
+      ],
+      "title": "Power [ W / VA / Var ]",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_OI01-GLOBAL-INFLUX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "stepBefore",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 17,
+        "x": 0,
+        "y": 49
+      },
+      "id": 12,
+      "maxDataPoints": 100000000,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ElectricalMeasurement\")\r\n  |> filter(fn: (r) => r[\"SensorName\"] == \"BC1\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"L1_PowFactor\" or  r[\"_field\"] == \"L2_PowFactor\" or r[\"_field\"] == \"L3_PowFactor\")\r\n\r\n",
+          "refId": "A"
+        }
+      ],
+      "title": "Power Factor",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 55
+      },
+      "id": 8,
+      "panels": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "stepAfter",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 17,
+            "x": 0,
+            "y": 2
+          },
+          "id": 9,
+          "maxDataPoints": 100000000,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": false
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ElectricalMeasurement\")\r\n  |> filter(fn: (r) => r[\"SensorName\"] == \"BC2\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"DriveState\")\r\n\r\n  //|> map(fn: (r) => ( { r with DriveStatus: if r._value == \"Running\" then 1\r\n  //                                          else if r._value == \"Stopped\" then 0\r\n   //                                         else\r\n   //                                             0\r\n   //                     })  )",
+              "refId": "A"
+            }
+          ],
+          "title": "Drv Status",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "max": 10,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 14,
+            "w": 7,
+            "x": 17,
+            "y": 2
+          },
+          "id": 25,
+          "maxDataPoints": 100000000,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": false
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ElectricalMeasurement\")\r\n  |> filter(fn: (r) => r[\"SensorName\"] == \"BC2\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"CurrentAssymetry\")\r\n  |> aggregateWindow(every: 10ms, fn: last, createEmpty: false)\r\n  //|> yield(name: \"raw\")\r\n  |> movingAverage(n: 10)\r\n  |> yield(name: \"avarage\")\r\n",
+              "refId": "A"
+            }
+          ],
+          "title": "Current Assymetry [%]",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "stepBefore",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "L3_Current BC2"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "dark-blue",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "__systemRef": "hideSeriesFrom",
+                "matcher": {
+                  "id": "byNames",
+                  "options": {
+                    "mode": "exclude",
+                    "names": [
+                      "L1_Current BC2"
+                    ],
+                    "prefix": "All except:",
+                    "readOnly": true
+                  }
+                },
+                "properties": [
+                  {
+                    "id": "custom.hideFrom",
+                    "value": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": true
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 17,
+            "x": 0,
+            "y": 8
+          },
+          "id": 10,
+          "maxDataPoints": 100000000,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ElectricalMeasurement\")\r\n  |> filter(fn: (r) => r[\"SensorName\"] == \"BC2\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"L1_Current\" or  r[\"_field\"] == \"L2_Current\" or r[\"_field\"] == \"L3_Current\")\r\n   |> aggregateWindow(every: 10ms, fn: last, createEmpty: false)\r\n\r\n",
+              "refId": "A"
+            }
+          ],
+          "title": "Current [ A ]",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "max": 50,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 13,
+            "w": 17,
+            "x": 0,
+            "y": 16
+          },
+          "id": 27,
+          "maxDataPoints": 100000000,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": false
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ElectricalMeasurement\")\r\n  |> filter(fn: (r) => r[\"SensorName\"] == \"BC2\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"L1_CurrIntegral\")\r\n\r\n",
+              "refId": "A"
+            }
+          ],
+          "title": "Current Integral",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 1,
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 20
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 7,
+            "x": 17,
+            "y": 16
+          },
+          "id": 59,
+          "maxDataPoints": 100000000,
+          "options": {
+            "displayMode": "basic",
+            "minVizHeight": 0,
+            "minVizWidth": 0,
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "text": {
+              "valueSize": 20
+            }
+          },
+          "pluginVersion": "9.2.4",
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC2\")\r\n  |> filter(fn: (r) => r._field == \"L1_CurrIntegral_Anomaly\")\r\n  \r\n |> reduce(\r\n             fn: (r, accumulator) => ( {\r\n                                        sum_anom: r._value + accumulator.sum_anom, \r\n                                        count_anom: accumulator.count_anom + 1,\r\n                                        ratio:  100.0 * float(v: r._value + accumulator.sum_anom ) / float (v: accumulator.count_anom + 1 ),\r\n                                        } ),\r\n             identity: {sum_anom: 0.0 , count_anom: 0, ratio: 0.0},\r\n  )\r\n\r\n|> drop (columns: [\"sum_anom\" , \"count_anom\"] )",
+              "refId": "A"
+            }
+          ],
+          "title": "Anomaly ratio - Current Integral Phase L1",
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 1,
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 20
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 7,
+            "x": 17,
+            "y": 18
+          },
+          "id": 60,
+          "maxDataPoints": 100000000,
+          "options": {
+            "displayMode": "basic",
+            "minVizHeight": 0,
+            "minVizWidth": 0,
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "text": {
+              "valueSize": 20
+            }
+          },
+          "pluginVersion": "9.2.4",
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC2\")\r\n  |> filter(fn: (r) => r._field == \"L2_CurrIntegral_Anomaly\")\r\n  \r\n |> reduce(\r\n             fn: (r, accumulator) => ( {\r\n                                        sum_anom: r._value + accumulator.sum_anom, \r\n                                        count_anom: accumulator.count_anom + 1,\r\n                                        ratio:  100.0 * float(v: r._value + accumulator.sum_anom ) / float (v: accumulator.count_anom + 1 ),\r\n                                        } ),\r\n             identity: {sum_anom: 0.0 , count_anom: 0, ratio: 0.0},\r\n  )\r\n\r\n|> drop (columns: [\"sum_anom\" , \"count_anom\"] )",
+              "refId": "A"
+            }
+          ],
+          "title": "Anomaly ratio - Current Integral Phase L2",
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 1,
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 20
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 7,
+            "x": 17,
+            "y": 20
+          },
+          "id": 61,
+          "maxDataPoints": 100000000,
+          "options": {
+            "displayMode": "basic",
+            "minVizHeight": 0,
+            "minVizWidth": 0,
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "text": {
+              "valueSize": 20
+            }
+          },
+          "pluginVersion": "9.2.4",
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC2\")\r\n  |> filter(fn: (r) => r._field == \"L3_CurrIntegral_Anomaly\")\r\n  \r\n |> reduce(\r\n             fn: (r, accumulator) => ( {\r\n                                        sum_anom: r._value + accumulator.sum_anom, \r\n                                        count_anom: accumulator.count_anom + 1,\r\n                                        ratio:  100.0 * float(v: r._value + accumulator.sum_anom ) / float (v: accumulator.count_anom + 1 ),\r\n                                        } ),\r\n             identity: {sum_anom: 0.0 , count_anom: 0, ratio: 0.0},\r\n  )\r\n\r\n|> drop (columns: [\"sum_anom\" , \"count_anom\"] )",
+              "refId": "A"
+            }
+          ],
+          "title": "Anomaly ratio - Current Integral Phase L3",
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "axisSoftMax": 100,
+                "axisSoftMin": 0,
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "smooth",
+                "lineWidth": 2,
+                "pointSize": 2,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byFrameRefID",
+                  "options": "A"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "L1"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byFrameRefID",
+                  "options": "B"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "L2"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byFrameRefID",
+                  "options": "C"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "L3"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 7,
+            "x": 17,
+            "y": 22
+          },
+          "id": 84,
+          "maxDataPoints": 100000000,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC2\")\r\n  |> filter(fn: (r) => r._field == \"L1_CurrIntegral_AnomalyRatio\"  ) \r\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n\r\n  |> map (fn: (r) =>  ( { r with anomalyPercent: r.L1_CurrIntegral_AnomalyRatio * 100.0 } )  )\r\n  |> drop(columns: [\"L1_CurrIntegral_AnomalyRatio\"])\r\n\r\n\r\n\r\n\r\n  ",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "hide": false,
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC2\")\r\n  |> filter(fn: (r) => r._field == \"L2_CurrIntegral_AnomalyRatio\" ) \r\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n\r\n  |> map (fn: (r) =>  ( { r with anomalyPercent: r.L2_CurrIntegral_AnomalyRatio * 100.0 } )  )\r\n  |> drop(columns: [\"L2_CurrIntegral_AnomalyRatio\"])",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "hide": false,
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC2\")\r\n  |> filter(fn: (r) => r._field == \"L3_CurrIntegral_AnomalyRatio\" ) \r\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n\r\n  |> map (fn: (r) =>  ( { r with anomalyPercent: r.L3_CurrIntegral_AnomalyRatio * 100.0 } )  )\r\n  |> drop(columns: [\"L3_CurrIntegral_AnomalyRatio\"])",
+              "refId": "C"
+            }
+          ],
+          "title": "Anomaly trend  [%] - Current integral",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "max": 2,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 12,
+            "w": 17,
+            "x": 0,
+            "y": 29
+          },
+          "id": 29,
+          "maxDataPoints": 100000000,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": false
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ElectricalMeasurement\")\r\n  |> filter(fn: (r) => r[\"SensorName\"] == \"BC2\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"L1_InrushCurr\")\r\n\r\n",
+              "refId": "A"
+            }
+          ],
+          "title": "Inrush Current [A]",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 1,
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 20
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 7,
+            "x": 17,
+            "y": 29
+          },
+          "id": 63,
+          "maxDataPoints": 100000000,
+          "options": {
+            "displayMode": "basic",
+            "minVizHeight": 0,
+            "minVizWidth": 0,
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "text": {
+              "valueSize": 20
+            }
+          },
+          "pluginVersion": "9.2.4",
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC2\")\r\n  |> filter(fn: (r) => r._field == \"L1_InrushCurr_Anomaly\")\r\n  \r\n |> reduce(\r\n             fn: (r, accumulator) => ( {\r\n                                        sum_anom: r._value + accumulator.sum_anom, \r\n                                        count_anom: accumulator.count_anom + 1,\r\n                                        ratio:  100.0 * float(v: r._value + accumulator.sum_anom ) / float (v: accumulator.count_anom + 1 ),\r\n                                        } ),\r\n             identity: {sum_anom: 0.0 , count_anom: 0, ratio: 0.0},\r\n  )\r\n\r\n|> drop (columns: [\"sum_anom\" , \"count_anom\"] )",
+              "refId": "A"
+            }
+          ],
+          "title": "Anomaly ratio - Inrush  Current Phase L1",
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 1,
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 20
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 7,
+            "x": 17,
+            "y": 31
+          },
+          "id": 64,
+          "maxDataPoints": 100000000,
+          "options": {
+            "displayMode": "basic",
+            "minVizHeight": 0,
+            "minVizWidth": 0,
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "text": {
+              "valueSize": 20
+            }
+          },
+          "pluginVersion": "9.2.4",
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC2\")\r\n  |> filter(fn: (r) => r._field == \"L2_InrushCurr_Anomaly\")\r\n  \r\n |> reduce(\r\n             fn: (r, accumulator) => ( {\r\n                                        sum_anom: r._value + accumulator.sum_anom, \r\n                                        count_anom: accumulator.count_anom + 1,\r\n                                        ratio:  100.0 * float(v: r._value + accumulator.sum_anom ) / float (v: accumulator.count_anom + 1 ),\r\n                                        } ),\r\n             identity: {sum_anom: 0.0 , count_anom: 0, ratio: 0.0},\r\n  )\r\n\r\n|> drop (columns: [\"sum_anom\" , \"count_anom\"] )",
+              "refId": "A"
+            }
+          ],
+          "title": "Anomaly ratio - Inrush  Current Phase L2",
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 1,
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 20
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 7,
+            "x": 17,
+            "y": 33
+          },
+          "id": 65,
+          "maxDataPoints": 100000000,
+          "options": {
+            "displayMode": "basic",
+            "minVizHeight": 0,
+            "minVizWidth": 0,
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "text": {
+              "valueSize": 20
+            }
+          },
+          "pluginVersion": "9.2.4",
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC2\")\r\n  |> filter(fn: (r) => r._field == \"L3_InrushCurr_Anomaly\")\r\n  \r\n |> reduce(\r\n             fn: (r, accumulator) => ( {\r\n                                        sum_anom: r._value + accumulator.sum_anom, \r\n                                        count_anom: accumulator.count_anom + 1,\r\n                                        ratio:  100.0 * float(v: r._value + accumulator.sum_anom ) / float (v: accumulator.count_anom + 1 ),\r\n                                        } ),\r\n             identity: {sum_anom: 0.0 , count_anom: 0, ratio: 0.0},\r\n  )\r\n\r\n|> drop (columns: [\"sum_anom\" , \"count_anom\"] )",
+              "refId": "A"
+            }
+          ],
+          "title": "Anomaly ratio - Inrush  Current Phase L3",
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "axisSoftMax": 100,
+                "axisSoftMin": 0,
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "smooth",
+                "lineWidth": 2,
+                "pointSize": 2,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byFrameRefID",
+                  "options": "A"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "L1"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byFrameRefID",
+                  "options": "B"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "L2"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byFrameRefID",
+                  "options": "C"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "L3"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 7,
+            "x": 17,
+            "y": 35
+          },
+          "id": 86,
+          "maxDataPoints": 100000000,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC2\")\r\n  |> filter(fn: (r) => r._field == \"L1_InrushCurr_AnomalyRatio\" ) \r\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n\r\n  |> map (fn: (r) =>  ( { r with anomalyPercent: r.L1_InrushCurr_AnomalyRatio * 100.0 } )  )\r\n  |> drop(columns: [\"L1_InrushCurr_AnomalyRatio\"])\r\n\r\n\r\n\r\n\r\n  ",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "hide": false,
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC2\")\r\n  |> filter(fn: (r) => r._field == \"L2_InrushCurr_AnomalyRatio\" ) \r\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n\r\n  |> map (fn: (r) =>  ( { r with anomalyPercent: r.L2_InrushCurr_AnomalyRatio * 100.0 } )  )\r\n  |> drop(columns: [\"L2_InrushCurr_AnomalyRatio\"])",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "hide": false,
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC2\")\r\n  |> filter(fn: (r) => r._field == \"L3_InrushCurr_AnomalyRatio\" ) \r\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n\r\n  |> map (fn: (r) =>  ( { r with anomalyPercent: r.L3_InrushCurr_AnomalyRatio * 100.0 } )  )\r\n  |> drop(columns: [\"L3_InrushCurr_AnomalyRatio\"])",
+              "refId": "C"
+            }
+          ],
+          "title": "Anomaly trend  [%] - Inrush current",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 17,
+            "x": 0,
+            "y": 41
+          },
+          "id": 11,
+          "maxDataPoints": 100000000,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ElectricalMeasurement\")\r\n  |> filter(fn: (r) => r[\"SensorName\"] == \"BC2\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"L1_ActPower\" or r[\"_field\"] == \"L2_ActPower\" or r[\"_field\"] == \"L3_ActPower\" or\r\n  r[\"_field\"] == \"L1_ApparPower\" or r[\"_field\"] == \"L2_ApparPower\" or r[\"_field\"] == \"L3_ApparPower\" or\r\n  r[\"_field\"] == \"L1_ReactPower\" or r[\"_field\"] == \"L2_ReactPower\" or r[\"_field\"] == \"L3_ReactPower\" )\r\n\r\n",
+              "refId": "A"
+            }
+          ],
+          "title": "Power [ W / VA / Var ]",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "stepBefore",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 17,
+            "x": 0,
+            "y": 49
+          },
+          "id": 13,
+          "maxDataPoints": 100000000,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ElectricalMeasurement\")\r\n  |> filter(fn: (r) => r[\"SensorName\"] == \"BC2\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"L1_PowFactor\" or  r[\"_field\"] == \"L2_PowFactor\" or r[\"_field\"] == \"L3_PowFactor\")\r\n\r\n",
+              "refId": "A"
+            }
+          ],
+          "title": "Power Factor",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "stepBefore",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 17,
+            "x": 0,
+            "y": 55
+          },
+          "id": 14,
+          "maxDataPoints": 100000000,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ElectricalMeasurement\")\r\n  |> filter(fn: (r) => r[\"SensorName\"] == \"BC2\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"L1_CurrentTHD\" or  r[\"_field\"] == \"L2_CurrentTHD\" or r[\"_field\"] == \"L3_CurrentTHD\")\r\n\r\n",
+              "refId": "A"
+            }
+          ],
+          "title": "THD current",
+          "type": "timeseries"
+        }
+      ],
+      "title": "BC2 - Infeed Belt 2",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 56
+      },
+      "id": 16,
+      "panels": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "stepAfter",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 17,
+            "x": 0,
+            "y": 3
+          },
+          "id": 17,
+          "maxDataPoints": 100000000,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ElectricalMeasurement\")\r\n  |> filter(fn: (r) => r[\"SensorName\"] == \"BC3\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"DriveState\")\r\n\r\n  //|> map(fn: (r) => ( { r with DriveStatus: if r._value == \"Running\" then 1\r\n  //                                          else if r._value == \"Stopped\" then 0\r\n   //                                         else\r\n   //                                             0\r\n   //                     })  )",
+              "refId": "A"
+            }
+          ],
+          "title": "Drv Status",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "max": 10,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 12,
+            "w": 7,
+            "x": 17,
+            "y": 3
+          },
+          "id": 31,
+          "maxDataPoints": 100000000,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": false
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ElectricalMeasurement\")\r\n  |> filter(fn: (r) => r[\"SensorName\"] == \"BC3\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"CurrentAssymetry\")\r\n  |> aggregateWindow(every: 10ms, fn: last, createEmpty: false)\r\n  //|> yield(name: \"raw\")\r\n  |> movingAverage(n: 10)\r\n  |> yield(name: \"avarage\")\r\n\r\n",
+              "refId": "A"
+            }
+          ],
+          "title": "Current Assymetry [%]",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "L3_Current BC2"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "dark-blue",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 17,
+            "x": 0,
+            "y": 7
+          },
+          "id": 18,
+          "maxDataPoints": 100000000,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ElectricalMeasurement\")\r\n  |> filter(fn: (r) => r[\"SensorName\"] == \"BC3\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"L1_Current\" or  r[\"_field\"] == \"L2_Current\" or r[\"_field\"] == \"L3_Current\")\r\n\r\n",
+              "refId": "A"
+            }
+          ],
+          "title": "Current [ A ]",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "max": 50,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "__systemRef": "hideSeriesFrom",
+                "matcher": {
+                  "id": "byNames",
+                  "options": {
+                    "mode": "exclude",
+                    "names": [
+                      "L1_CurrIntegral BC3"
+                    ],
+                    "prefix": "All except:",
+                    "readOnly": true
+                  }
+                },
+                "properties": [
+                  {
+                    "id": "custom.hideFrom",
+                    "value": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": true
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 13,
+            "w": 17,
+            "x": 0,
+            "y": 15
+          },
+          "id": 45,
+          "maxDataPoints": 100000000,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ElectricalMeasurement\")\r\n  |> filter(fn: (r) => r[\"SensorName\"] == \"BC3\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"L1_CurrIntegral\" or r[\"_field\"] == \"L2_CurrIntegral\" or r[\"_field\"] == \"L3_CurrIntegral\"  )\r\n\r\n",
+              "refId": "A"
+            }
+          ],
+          "title": "Current Integral",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 1,
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 20
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 7,
+            "x": 17,
+            "y": 15
+          },
+          "id": 74,
+          "maxDataPoints": 100000000,
+          "options": {
+            "displayMode": "basic",
+            "minVizHeight": 0,
+            "minVizWidth": 0,
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "text": {
+              "valueSize": 20
+            }
+          },
+          "pluginVersion": "9.2.4",
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC3\")\r\n  |> filter(fn: (r) => r._field == \"L1_CurrIntegral_Anomaly\")\r\n  \r\n |> reduce(\r\n             fn: (r, accumulator) => ( {\r\n                                        sum_anom: r._value + accumulator.sum_anom, \r\n                                        count_anom: accumulator.count_anom + 1,\r\n                                        ratio:  100.0 * float(v: r._value + accumulator.sum_anom ) / float (v: accumulator.count_anom + 1 ),\r\n                                        } ),\r\n             identity: {sum_anom: 0.0 , count_anom: 0, ratio: 0.0},\r\n  )\r\n\r\n|> drop (columns: [\"sum_anom\" , \"count_anom\"] )",
+              "refId": "A"
+            }
+          ],
+          "title": "Anomaly ratio - Current Integral Phase L1",
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 1,
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 20
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 7,
+            "x": 17,
+            "y": 17
+          },
+          "id": 75,
+          "maxDataPoints": 100000000,
+          "options": {
+            "displayMode": "basic",
+            "minVizHeight": 0,
+            "minVizWidth": 0,
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "text": {
+              "valueSize": 20
+            }
+          },
+          "pluginVersion": "9.2.4",
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC3\")\r\n  |> filter(fn: (r) => r._field == \"L2_CurrIntegral_Anomaly\")\r\n  \r\n |> reduce(\r\n             fn: (r, accumulator) => ( {\r\n                                        sum_anom: r._value + accumulator.sum_anom, \r\n                                        count_anom: accumulator.count_anom + 1,\r\n                                        ratio:  100.0 * float(v: r._value + accumulator.sum_anom ) / float (v: accumulator.count_anom + 1 ),\r\n                                        } ),\r\n             identity: {sum_anom: 0.0 , count_anom: 0, ratio: 0.0},\r\n  )\r\n\r\n|> drop (columns: [\"sum_anom\" , \"count_anom\"] )",
+              "refId": "A"
+            }
+          ],
+          "title": "Anomaly ratio - Current Integral Phase L2",
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 1,
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 20
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 7,
+            "x": 17,
+            "y": 19
+          },
+          "id": 76,
+          "maxDataPoints": 100000000,
+          "options": {
+            "displayMode": "basic",
+            "minVizHeight": 0,
+            "minVizWidth": 0,
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "text": {
+              "valueSize": 20
+            }
+          },
+          "pluginVersion": "9.2.4",
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC3\")\r\n  |> filter(fn: (r) => r._field == \"L3_CurrIntegral_Anomaly\")\r\n  \r\n |> reduce(\r\n             fn: (r, accumulator) => ( {\r\n                                        sum_anom: r._value + accumulator.sum_anom, \r\n                                        count_anom: accumulator.count_anom + 1,\r\n                                        ratio:  100.0 * float(v: r._value + accumulator.sum_anom ) / float (v: accumulator.count_anom + 1 ),\r\n                                        } ),\r\n             identity: {sum_anom: 0.0 , count_anom: 0, ratio: 0.0},\r\n  )\r\n\r\n|> drop (columns: [\"sum_anom\" , \"count_anom\"] )",
+              "refId": "A"
+            }
+          ],
+          "title": "Anomaly ratio - Current Integral Phase L3",
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "axisSoftMax": 100,
+                "axisSoftMin": 0,
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "smooth",
+                "lineWidth": 2,
+                "pointSize": 2,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byFrameRefID",
+                  "options": "A"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "L1"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byFrameRefID",
+                  "options": "B"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "L2"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byFrameRefID",
+                  "options": "C"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "L3"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 7,
+            "x": 17,
+            "y": 21
+          },
+          "id": 88,
+          "maxDataPoints": 100000000,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC3\")\r\n  |> filter(fn: (r) => r._field == \"L1_CurrIntegral_AnomalyRatio\"  ) \r\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n\r\n  |> map (fn: (r) =>  ( { r with anomalyPercent: r.L1_CurrIntegral_AnomalyRatio * 100.0 } )  )\r\n  |> drop(columns: [\"L1_CurrIntegral_AnomalyRatio\"])\r\n\r\n\r\n\r\n\r\n  ",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "hide": false,
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC3\")\r\n  |> filter(fn: (r) => r._field == \"L2_CurrIntegral_AnomalyRatio\" ) \r\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n\r\n  |> map (fn: (r) =>  ( { r with anomalyPercent: r.L2_CurrIntegral_AnomalyRatio * 100.0 } )  )\r\n  |> drop(columns: [\"L2_CurrIntegral_AnomalyRatio\"])",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "hide": false,
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC3\")\r\n  |> filter(fn: (r) => r._field == \"L3_CurrIntegral_AnomalyRatio\" ) \r\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n\r\n  |> map (fn: (r) =>  ( { r with anomalyPercent: r.L3_CurrIntegral_AnomalyRatio * 100.0 } )  )\r\n  |> drop(columns: [\"L3_CurrIntegral_AnomalyRatio\"])",
+              "refId": "C"
+            }
+          ],
+          "title": "Anomaly trend  [%] - Current Integral",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "__systemRef": "hideSeriesFrom",
+                "matcher": {
+                  "id": "byNames",
+                  "options": {
+                    "mode": "exclude",
+                    "names": [
+                      "L1_InrushCurr BC3"
+                    ],
+                    "prefix": "All except:",
+                    "readOnly": true
+                  }
+                },
+                "properties": [
+                  {
+                    "id": "custom.hideFrom",
+                    "value": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": true
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 12,
+            "w": 17,
+            "x": 0,
+            "y": 28
+          },
+          "id": 47,
+          "maxDataPoints": 100000000,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ElectricalMeasurement\")\r\n  |> filter(fn: (r) => r[\"SensorName\"] == \"BC3\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"L1_InrushCurr\" or r[\"_field\"] == \"L2_InrushCurr\" or r[\"_field\"] == \"L3_InrushCurr\" )\r\n\r\n",
+              "refId": "A"
+            }
+          ],
+          "title": "Inrush Current [A]",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 1,
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 20
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 7,
+            "x": 17,
+            "y": 28
+          },
+          "id": 78,
+          "maxDataPoints": 100000000,
+          "options": {
+            "displayMode": "basic",
+            "minVizHeight": 0,
+            "minVizWidth": 0,
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "text": {
+              "valueSize": 20
+            }
+          },
+          "pluginVersion": "9.2.4",
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC3\")\r\n  |> filter(fn: (r) => r._field == \"L1_InrushCurr_Anomaly\")\r\n  \r\n |> reduce(\r\n             fn: (r, accumulator) => ( {\r\n                                        sum_anom: r._value + accumulator.sum_anom, \r\n                                        count_anom: accumulator.count_anom + 1,\r\n                                        ratio:  100.0 * float(v: r._value + accumulator.sum_anom ) / float (v: accumulator.count_anom + 1 ),\r\n                                        } ),\r\n             identity: {sum_anom: 0.0 , count_anom: 0, ratio: 0.0},\r\n  )\r\n\r\n|> drop (columns: [\"sum_anom\" , \"count_anom\"] )",
+              "refId": "A"
+            }
+          ],
+          "title": "Anomaly ratio - Inrush  Current Phase L1",
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 1,
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 20
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 7,
+            "x": 17,
+            "y": 30
+          },
+          "id": 79,
+          "maxDataPoints": 100000000,
+          "options": {
+            "displayMode": "basic",
+            "minVizHeight": 0,
+            "minVizWidth": 0,
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "text": {
+              "valueSize": 20
+            }
+          },
+          "pluginVersion": "9.2.4",
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC3\")\r\n  |> filter(fn: (r) => r._field == \"L2_InrushCurr_Anomaly\")\r\n  \r\n |> reduce(\r\n             fn: (r, accumulator) => ( {\r\n                                        sum_anom: r._value + accumulator.sum_anom, \r\n                                        count_anom: accumulator.count_anom + 1,\r\n                                        ratio:  100.0 * float(v: r._value + accumulator.sum_anom ) / float (v: accumulator.count_anom + 1 ),\r\n                                        } ),\r\n             identity: {sum_anom: 0.0 , count_anom: 0, ratio: 0.0},\r\n  )\r\n\r\n|> drop (columns: [\"sum_anom\" , \"count_anom\"] )",
+              "refId": "A"
+            }
+          ],
+          "title": "Anomaly ratio - Inrush  Current Phase L2",
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 1,
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 20
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 7,
+            "x": 17,
+            "y": 32
+          },
+          "id": 80,
+          "maxDataPoints": 100000000,
+          "options": {
+            "displayMode": "basic",
+            "minVizHeight": 0,
+            "minVizWidth": 0,
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "text": {
+              "valueSize": 20
+            }
+          },
+          "pluginVersion": "9.2.4",
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC3\")\r\n  |> filter(fn: (r) => r._field == \"L3_InrushCurr_Anomaly\")\r\n  \r\n |> reduce(\r\n             fn: (r, accumulator) => ( {\r\n                                        sum_anom: r._value + accumulator.sum_anom, \r\n                                        count_anom: accumulator.count_anom + 1,\r\n                                        ratio:  100.0 * float(v: r._value + accumulator.sum_anom ) / float (v: accumulator.count_anom + 1 ),\r\n                                        } ),\r\n             identity: {sum_anom: 0.0 , count_anom: 0, ratio: 0.0},\r\n  )\r\n\r\n|> drop (columns: [\"sum_anom\" , \"count_anom\"] )",
+              "refId": "A"
+            }
+          ],
+          "title": "Anomaly ratio - Inrush  Current Phase L3",
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "axisSoftMax": 100,
+                "axisSoftMin": 0,
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "smooth",
+                "lineWidth": 2,
+                "pointSize": 2,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byFrameRefID",
+                  "options": "A"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "L1"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byFrameRefID",
+                  "options": "B"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "L2"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byFrameRefID",
+                  "options": "C"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "L3"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 7,
+            "x": 17,
+            "y": 34
+          },
+          "id": 90,
+          "maxDataPoints": 100000000,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC3\")\r\n  |> filter(fn: (r) => r._field == \"L1_InrushCurr_AnomalyRatio\" ) \r\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n\r\n  |> map (fn: (r) =>  ( { r with anomalyPercent: r.L1_InrushCurr_AnomalyRatio * 100.0 } )  )\r\n  |> drop(columns: [\"L1_InrushCurr_AnomalyRatio\"])\r\n\r\n\r\n\r\n\r\n  ",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "hide": false,
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC3\")\r\n  |> filter(fn: (r) => r._field == \"L2_InrushCurr_AnomalyRatio\" ) \r\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n\r\n  |> map (fn: (r) =>  ( { r with anomalyPercent: r.L2_InrushCurr_AnomalyRatio * 100.0 } )  )\r\n  |> drop(columns: [\"L2_InrushCurr_AnomalyRatio\"])",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "hide": false,
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ElectricalMeasurement\" and r.SensorName == \"BC3\")\r\n  |> filter(fn: (r) => r._field == \"L3_InrushCurr_AnomalyRatio\" ) \r\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n\r\n  |> map (fn: (r) =>  ( { r with anomalyPercent: r.L3_InrushCurr_AnomalyRatio * 100.0 } )  )\r\n  |> drop(columns: [\"L3_InrushCurr_AnomalyRatio\"])",
+              "refId": "C"
+            }
+          ],
+          "title": "Anomaly trend  [%] - Inrush current",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 17,
+            "x": 0,
+            "y": 40
+          },
+          "id": 72,
+          "maxDataPoints": 100000000,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ElectricalMeasurement\")\r\n  |> filter(fn: (r) => r[\"SensorName\"] == \"BC3\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"L1_ActPower\" or r[\"_field\"] == \"L2_ActPower\" or r[\"_field\"] == \"L3_ActPower\" or\r\n  r[\"_field\"] == \"L1_ApparPower\" or r[\"_field\"] == \"L2_ApparPower\" or r[\"_field\"] == \"L3_ApparPower\" or\r\n  r[\"_field\"] == \"L1_ReactPower\" or r[\"_field\"] == \"L2_ReactPower\" or r[\"_field\"] == \"L3_ReactPower\" )\r\n\r\n",
+              "refId": "A"
+            }
+          ],
+          "title": "Power [ W / VA / Var ]",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "stepBefore",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 17,
+            "x": 0,
+            "y": 48
+          },
+          "id": 19,
+          "maxDataPoints": 100000000,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ElectricalMeasurement\")\r\n  |> filter(fn: (r) => r[\"SensorName\"] == \"BC3\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"L1_PowFactor\" or  r[\"_field\"] == \"L2_PowFactor\" or r[\"_field\"] == \"L3_PowFactor\")\r\n\r\n",
+              "refId": "A"
+            }
+          ],
+          "title": "Power Factor",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "stepBefore",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 17,
+            "x": 0,
+            "y": 54
+          },
+          "id": 20,
+          "maxDataPoints": 100000000,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_OI01-GLOBAL-INFLUX}"
+              },
+              "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ElectricalMeasurement\")\r\n  |> filter(fn: (r) => r[\"SensorName\"] == \"BC3\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"L1_CurrentTHD\" or  r[\"_field\"] == \"L2_CurrentTHD\" or r[\"_field\"] == \"L3_CurrentTHD\")\r\n\r\n",
+              "refId": "A"
+            }
+          ],
+          "title": "THD current",
+          "type": "timeseries"
+        }
+      ],
+      "title": "BC3 - Infeed Belt 1",
+      "type": "row"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [
+    "PPSL1_Electrical"
+  ],
+  "templating": {
+    "list": [
+      {
+        "hide": 2,
+        "name": "Process_Bucket",
+        "query": "${VAR_PROCESS_BUCKET}",
+        "skipUrlSync": false,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_PROCESS_BUCKET}",
+          "text": "${VAR_PROCESS_BUCKET}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_PROCESS_BUCKET}",
+            "text": "${VAR_PROCESS_BUCKET}",
+            "selected": false
+          }
+        ]
+      }
+    ]
+  },
+  "time": {
+    "from": "now-3h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "PPS L1 - Electrical Measurements",
+  "uid": "T6VkwdOVk",
+  "version": 94,
+  "weekStart": ""
+}

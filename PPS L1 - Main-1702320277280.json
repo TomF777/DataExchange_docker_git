@@ -1,0 +1,1473 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_OI01-GLOBAL-INFLUX",
+      "label": "OI01-Global-Influx",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "influxdb",
+      "pluginName": "InfluxDB"
+    },
+    {
+      "name": "VAR_PROCESS_BUCKET",
+      "type": "constant",
+      "label": "Process_Bucket",
+      "value": "PPSL1",
+      "description": ""
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "bargauge",
+      "name": "Bar gauge",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "9.5.14"
+    },
+    {
+      "type": "datasource",
+      "id": "influxdb",
+      "name": "InfluxDB",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "natel-discrete-panel",
+      "name": "Discrete",
+      "version": "0.1.1"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "text",
+      "name": "Text",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": true,
+      "keepTime": true,
+      "tags": [
+        "PPSL1_Actuators"
+      ],
+      "targetBlank": false,
+      "title": "PPSL1_Actuators",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    },
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": true,
+      "keepTime": true,
+      "tags": [
+        "PPSL1_Vibrations"
+      ],
+      "targetBlank": false,
+      "title": "PPSL1_Vibrations",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    },
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": true,
+      "keepTime": true,
+      "tags": [
+        "PPSL1_CompressedAir"
+      ],
+      "targetBlank": false,
+      "title": "PPSL1_CompressedAir",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    },
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": true,
+      "keepTime": true,
+      "tags": [
+        "PPSL1_Electrical"
+      ],
+      "targetBlank": false,
+      "title": "PPSL1_Electrical",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    }
+  ],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 2,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      },
+      "id": 14,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<h2 style=\"color: #FFFFFF; background-color: #1D9FEF; font-size: 17px;text-align:center\">\r\nMax Anomaly Vibration [%]\r\n<br>\r\n .\r\n</h2>\r\n\r\n\r\n",
+        "mode": "html"
+      },
+      "pluginVersion": "9.5.14",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 2,
+        "w": 6,
+        "x": 6,
+        "y": 0
+      },
+      "id": 21,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<h2 style=\"color: #FFFFFF; background-color: #1D9FEF; font-size: 17px;text-align:center\">\r\nMax Anomaly [%]\r\n<br>\r\nAir Actuators Operating Time\r\n</h2>\r\n\r\n\r\n\r\n",
+        "mode": "html"
+      },
+      "pluginVersion": "9.5.14",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 2,
+        "w": 6,
+        "x": 12,
+        "y": 0
+      },
+      "id": 28,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<h2 style=\"color: #FFFFFF; background-color: #1D9FEF; font-size: 17px;text-align:center\">\r\nMax Anomaly [%]\r\n<br>\r\nElectrical Current Integral-Rot.Table\r\n</h2>\r\n\r\n\r\n\r\n",
+        "mode": "html"
+      },
+      "pluginVersion": "9.5.14",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 2,
+        "w": 6,
+        "x": 18,
+        "y": 0
+      },
+      "id": 29,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<h2 style=\"color: #FFFFFF; background-color: #1D9FEF; font-size: 17px;text-align:center\">\r\nMax Anomaly [%]\r\n<br>\r\nElectrical Current Inrush Current-Rot.Table\r\n</h2>\r\n\r\n\r\n\r\n",
+        "mode": "html"
+      },
+      "pluginVersion": "9.5.14",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_OI01-GLOBAL-INFLUX}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "max": 100,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Anomaly_ratio BS1"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "RotTable-Main Gearbox"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Anomaly_ratio BS2"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "RotTable-Interm. Gearbox"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Anomaly_ratio BS3"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "RotTable-Motor Front"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Anomaly_ratio BS4"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "RotTable-MotorBack"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Anomaly_ratio BS7"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Ring Infeed Belt-Gearbox"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Anomaly_ratio BS8"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Ring Infeed Belt-Front Bearing"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Anomaly_ratio BS9"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Discharge Belt-Gearbox"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Anomaly_ratio BS10"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Discharge Belt-Front Bearing"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Anomaly_ratio BS11"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Machine Body"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Anomaly_ratio BS12"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Mesh"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Anomaly_ratio BS13"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Vacuum Pump"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Anomaly_ratio BS5"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Control Buffer - Gearbox"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Anomaly_ratio BS6"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Control Buffer - Front Bearing"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 0,
+        "y": 2
+      },
+      "id": 34,
+      "options": {
+        "displayMode": "lcd",
+        "minVizHeight": 1,
+        "minVizWidth": 0,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {},
+        "valueMode": "color"
+      },
+      "pluginVersion": "9.5.14",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"VibAccelAnalytics\" and r._field == \"Anomaly_ratio\")\r\n\r\n// find max value of anomaly ratio for vibration sensors\r\n  |> filter(fn: (r) => r.SensorName == \"BS1\")\r\n  |>max()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  |> yield(name: \"BS1_max_anomaly_ratio\")\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+          "refId": "BS1_MainGearBox_RotTable"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"VibAccelAnalytics\" and r._field == \"Anomaly_ratio\")\r\n\r\n// find max value of anomaly ratio for vibration sensors\r\n  |> filter(fn: (r) => r.SensorName == \"BS2\")\r\n  |>max()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  |> yield(name: \"BS2_max_anomaly_ratio\")\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+          "refId": "BS2_IntermGearBox_RotTable"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"VibAccelAnalytics\" and r._field == \"Anomaly_ratio\")\r\n\r\n// find max value of anomaly ratio for vibration sensors\r\n  |> filter(fn: (r) => r.SensorName == \"BS3\")\r\n  |>max()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  |> yield(name: \"BS3_max_anomaly_ratio\")\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+          "refId": "BS3_MotorFront_RotTable"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"VibAccelAnalytics\" and r._field == \"Anomaly_ratio\")\r\n\r\n// find max value of anomaly ratio for vibration sensors\r\n  |> filter(fn: (r) => r.SensorName == \"BS4\")\r\n  |>max()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  |> yield(name: \"BS4_max_anomaly_ratio\")\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+          "refId": "BS4_MotorBack_RotTable"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"VibAccelAnalytics\" and r._field == \"Anomaly_ratio\")\r\n\r\n// find max value of anomaly ratio for vibration sensors\r\n  |> filter(fn: (r) => r.SensorName == \"BS5\")\r\n  |>max()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  |> yield(name: \"BS5_max_anomaly_ratio\")\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+          "refId": "BS5_InfeedBelt2_GearBox"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"VibAccelAnalytics\" and r._field == \"Anomaly_ratio\")\r\n\r\n// find max value of anomaly ratio for vibration sensors\r\n  |> filter(fn: (r) => r.SensorName == \"BS6\")\r\n  |>max()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  |> yield(name: \"BS6_max_anomaly_ratio\")\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+          "refId": "BS6_Front Bearing"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"VibAccelAnalytics\" and r._field == \"Anomaly_ratio\")\r\n\r\n// find max value of anomaly ratio for vibration sensors\r\n  |> filter(fn: (r) => r.SensorName == \"BS7\")\r\n  |>max()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  |> yield(name: \"BS7_max_anomaly_ratio\")\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+          "refId": "BS7_RingInfeedBelt_GearBox"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"VibAccelAnalytics\" and r._field == \"Anomaly_ratio\")\r\n\r\n// find max value of anomaly ratio for vibration sensors\r\n  |> filter(fn: (r) => r.SensorName == \"BS8\")\r\n  |>max()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  |> yield(name: \"BS8_max_anomaly_ratio\")\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+          "refId": "BS8_RingInfeedBelt_FrontBearing"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"VibAccelAnalytics\" and r._field == \"Anomaly_ratio\")\r\n\r\n// find max value of anomaly ratio for vibration sensors\r\n  |> filter(fn: (r) => r.SensorName == \"BS9\")\r\n  |>max()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  |> yield(name: \"BS9_max_anomaly_ratio\")\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+          "refId": "BS9_DischargeBelt_Gearbox"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"VibAccelAnalytics\" and r._field == \"Anomaly_ratio\")\r\n\r\n// find max value of anomaly ratio for vibration sensors\r\n  |> filter(fn: (r) => r.SensorName == \"BS10\")\r\n  |>max()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  |> yield(name: \"BS10_max_anomaly_ratio\")\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+          "refId": "BS10_DischargeBelt_FrontBearing"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"VibAccelAnalytics\" and r._field == \"Anomaly_ratio\")\r\n\r\n// find max value of anomaly ratio for vibration sensors\r\n  |> filter(fn: (r) => r.SensorName == \"BS11\")\r\n  |>max()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  |> yield(name: \"BS11_max_anomaly_ratio\")\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+          "refId": "BS11_MachineBody"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"VibAccelAnalytics\" and r._field == \"Anomaly_ratio\")\r\n\r\n// find max value of anomaly ratio for vibration sensors\r\n  |> filter(fn: (r) => r.SensorName == \"BS12\")\r\n  |>max()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  |> yield(name: \"BS12_max_anomaly_ratio\")\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+          "refId": "BS12_Mesh"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"VibAccelAnalytics\" and r._field == \"Anomaly_ratio\")\r\n\r\n// find max value of anomaly ratio for vibration sensors\r\n  |> filter(fn: (r) => r.SensorName == \"BS13\")\r\n  |>max()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  |> yield(name: \"BS13_max_anomaly_ratio\")\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+          "refId": "BS13_VacuumPump"
+        }
+      ],
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_OI01-GLOBAL-INFLUX}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "max": 100,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "AnomalyRatioMax_10N1"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "10N1"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "AnomalyRatioMax_10N3"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "10N3"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "AnomalyRatioMax_10N7"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "10N7"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "AnomalyRatioMax_10N10"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "10N10"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "AnomalyRatioMax_10N11"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "10N11"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "AnomalyRatioMax_10N31"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "10N31"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 6,
+        "y": 2
+      },
+      "id": 35,
+      "options": {
+        "displayMode": "lcd",
+        "minVizHeight": 1,
+        "minVizWidth": 0,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {},
+        "valueMode": "color"
+      },
+      "pluginVersion": "9.5.14",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "query": "data = from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ActuatorOperTimes\" and r.StationName == \"10N1\" and r._field == \"Anomaly_ratio\")\r\n\r\n// find max value of anomaly ratio for actuator operation time\r\nSlideUnitLeft_Extend = data |> filter(fn: (r) => r.DeviceName == \"SlideUnitLeft\" and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"SlideUnitLeft_Extend_max_anomaly_ratio\")\r\n\r\nSlideUnitLeft_Retract = data |> filter(fn: (r) => r.DeviceName == \"SlideUnitLeft\" and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"SlideUnitLeft_Retract_max_anomaly_ratio\")\r\n\r\nSlideUnitRight_Extend  = data |> filter(fn: (r) => r.DeviceName == \"SlideUnitRight\" and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"SlideUnitRight_Extend_max_anomaly_ratio\")\r\n\r\nSlideUnitRight_Retract   = data |> filter(fn: (r) => r.DeviceName == \"SlideUnitRight\" and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"SlideUnitRight_Retract_max_anomaly_ratio\")\r\n\r\nHardStop_Extend  = data |> filter(fn: (r) => r.DeviceName == \"HardStop\" and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"HardStop_Extend_max_anomaly_ratio\")\r\n\r\nHardStop_Retract  = data |> filter(fn: (r) => r.DeviceName == \"HardStop\" and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"HardStop_Retract_max_anomaly_ratio\")\r\n\r\n\r\ntotal1 = union (tables: [SlideUnitLeft_Extend, SlideUnitLeft_Retract])\r\ntotal2 = union (tables: [total1, SlideUnitRight_Extend])\r\ntotal3 = union (tables: [total2, SlideUnitRight_Retract])\r\ntotal4 = union (tables: [total3, HardStop_Extend])\r\ntotal5 = union (tables: [total4, HardStop_Retract])\r\n|> map(fn: (r) => ({ AnomalyRatioMax_10N1: r._value }))\r\n|>max(column: \"AnomalyRatioMax_10N1\" )\r\n|>yield(name:\"total\" )\r\n",
+          "refId": "10N1"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "hide": false,
+          "query": "data = from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ActuatorOperTimes\" and r.StationName == \"10N3\" and r._field == \"Anomaly_ratio\")\r\n\r\n// find max value of anomaly ratio for actuator operation time\r\nPartClamp1_Extend  = data |> filter(fn: (r) => r.DeviceName == \"PartClamp1\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"PartClamp1_Extend_max_anomaly_ratio\")\r\n\r\nPartClamp1_Retract  = data |> filter(fn: (r) => r.DeviceName == \"PartClamp1\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"PartClamp1_Retract_max_anomaly_ratio\")\r\n\r\n\r\nPartClamp2_Extend  = data |> filter(fn: (r) => r.DeviceName == \"PartClamp2\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"PartClamp2_Extend_max_anomaly_ratio\")\r\n\r\nPartClamp2_Retract  = data |> filter(fn: (r) => r.DeviceName == \"PartClamp2\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"PartClamp2_Retract_max_anomaly_ratio\")\r\n\r\n\r\nSlideUnitHor_Extend  = data |> filter(fn: (r) => r.DeviceName == \"SlideUnitHor\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"SlideUnitHor_Extend_max_anomaly_ratio\")\r\n\r\nSlideUnitHor_Retract  = data |> filter(fn: (r) => r.DeviceName == \"SlideUnitHor\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"SlideUnitHor_Retract_max_anomaly_ratio\")\r\n\r\n\r\nSlideUnitVert_Extend  = data |> filter(fn: (r) => r.DeviceName == \"SlideUnitVert\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"SlideUnitVert_Extend_max_anomaly_ratio\")\r\n\r\nSlideUnitVert_Retract  = data |> filter(fn: (r) => r.DeviceName == \"SlideUnitVert\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"SlideUnitVert_Retract_max_anomaly_ratio\")\r\n\r\n\r\n// find max of all max values\r\ntotal1 = union (tables: [PartClamp1_Extend, PartClamp1_Retract])\r\ntotal2 = union (tables: [total1, PartClamp2_Extend])\r\ntotal3 = union (tables: [total2, PartClamp2_Retract])\r\ntotal4 = union (tables: [total3, SlideUnitHor_Extend])\r\ntotal5 = union (tables: [total4, SlideUnitHor_Retract])\r\ntotal6 = union (tables: [total5, SlideUnitVert_Extend])\r\ntotal7 = union (tables: [total6, SlideUnitVert_Retract])\r\n\r\n\r\n|> map(fn: (r) => ({ AnomalyRatioMax_10N3: r._value }))\r\n|>max(column: \"AnomalyRatioMax_10N3\" )\r\n|>yield(name:\"total\" )",
+          "refId": "10N3"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "hide": false,
+          "query": "data = from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ActuatorOperTimes\" and r.StationName == \"10N7\" and r._field == \"Anomaly_ratio\")\r\n\r\n// find max value of anomaly ratio for actuator operation time\r\nPartClamp11_Extend  = data |> filter(fn: (r) => r.DeviceName == \"PartClamp11\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"PartClamp11_Extend_max_anomaly_ratio\")\r\n\r\nPartClamp11_Retract  = data |> filter(fn: (r) => r.DeviceName == \"PartClamp11\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"PartClamp11_Retract_max_anomaly_ratio\")\r\n\r\n\r\nPartClamp12_Extend  = data |> filter(fn: (r) => r.DeviceName == \"PartClamp12\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"PartClamp12_Extend_max_anomaly_ratio\")\r\n\r\nPartClamp12_Retract  = data |> filter(fn: (r) => r.DeviceName == \"PartClamp12\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"PartClamp12_Retract_max_anomaly_ratio\")\r\n\r\n\r\nPartClamp21_Extend  = data |> filter(fn: (r) => r.DeviceName == \"PartClamp21\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"PartClamp21_Extend_max_anomaly_ratio\")\r\n\r\nPartClamp21_Retract  = data |> filter(fn: (r) => r.DeviceName == \"PartClamp21\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"PartClamp21_Retract_max_anomaly_ratio\")\r\n\r\n\r\nPartClamp22_Extend  = data |> filter(fn: (r) => r.DeviceName == \"PartClamp22\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"PartClamp22_Extend_max_anomaly_ratio\")\r\n\r\nPartClamp22_Retract  = data |> filter(fn: (r) => r.DeviceName == \"PartClamp22\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"PartClamp22_Retract_max_anomaly_ratio\")\r\n\r\n\r\nPartClamp31_Extend  = data |> filter(fn: (r) => r.DeviceName == \"PartClamp31\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"PartClamp31_Extend_max_anomaly_ratio\")\r\n\r\nPartClamp31_Retract  = data |> filter(fn: (r) => r.DeviceName == \"PartClamp31\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"PartClamp31_Retract_max_anomaly_ratio\")\r\n\r\n\r\nPartClamp32_Extend  = data |> filter(fn: (r) => r.DeviceName == \"PartClamp32\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"PartClamp32_Extend_max_anomaly_ratio\")\r\n\r\nPartClamp32_Retract  = data |> filter(fn: (r) => r.DeviceName == \"PartClamp32\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"PartClamp32_Retract_max_anomaly_ratio\")\r\n\r\n\r\n// find max of all max values\r\ntotal1 = union (tables: [PartClamp11_Extend, PartClamp11_Retract])\r\ntotal2 = union (tables: [total1, PartClamp12_Extend])\r\ntotal3 = union (tables: [total2, PartClamp12_Retract])\r\ntotal4 = union (tables: [total3, PartClamp21_Extend])\r\ntotal5 = union (tables: [total4, PartClamp21_Retract])\r\ntotal6 = union (tables: [total5, PartClamp22_Extend])\r\ntotal7 = union (tables: [total6, PartClamp22_Retract])\r\n\r\ntotal8 = union (tables: [total7, PartClamp31_Extend])\r\ntotal9 = union (tables: [total8, PartClamp31_Retract])\r\ntotal10 = union (tables: [total9, PartClamp32_Extend])\r\ntotal11 = union (tables: [total10, PartClamp32_Retract])\r\n\r\n\r\n|> map(fn: (r) => ({ AnomalyRatioMax_10N7: r._value }))\r\n|>max(column: \"AnomalyRatioMax_10N7\" )\r\n|>yield(name:\"total\" )",
+          "refId": "10N7"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "hide": false,
+          "query": "data = from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ActuatorOperTimes\" and r.StationName == \"10N10\" and r._field == \"Anomaly_ratio\")\r\n\r\n// find max value of anomaly ratio for actuator operation time\r\nPartClamp1_Extend   = data |> filter(fn: (r) => r.DeviceName == \"PartClamp1\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"PartClamp1_Extend_max_anomaly_ratio\")\r\n\r\nPartClamp1_Retract   = data |> filter(fn: (r) => r.DeviceName == \"PartClamp1\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"PartClamp1_Retract_max_anomaly_ratio\")\r\n\r\n\r\nPartClamp2_Extend   = data |> filter(fn: (r) => r.DeviceName == \"PartClamp2\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"PartClamp2_Extend_max_anomaly_ratio\")\r\n\r\nPartClamp2_Retract   = data |> filter(fn: (r) => r.DeviceName == \"PartClamp2\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"PartClamp2_Retract_max_anomaly_ratio\")\r\n\r\n\r\nTurning1_Extend   = data |> filter(fn: (r) => r.DeviceName == \"Turning1\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"Turning1_Extend_max_anomaly_ratio\")\r\n\r\nTurning1_Retract   = data |> filter(fn: (r) => r.DeviceName == \"Turning1\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"Turning1_Retract_max_anomaly_ratio\")\r\n\r\n\r\nTurning2_Extend   = data |> filter(fn: (r) => r.DeviceName == \"Turning2\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"Turning2_Extend_max_anomaly_ratio\")\r\n\r\nTurning2_Retract   = data |> filter(fn: (r) => r.DeviceName == \"Turning2\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"Turning2_Retract_max_anomaly_ratio\")\r\n\r\n\r\n// find max of all max values\r\ntotal1 = union (tables: [PartClamp1_Extend, PartClamp1_Retract])\r\ntotal2 = union (tables: [total1, PartClamp2_Extend])\r\ntotal3 = union (tables: [total2, PartClamp2_Retract])\r\ntotal4 = union (tables: [total3, Turning1_Extend])\r\ntotal5 = union (tables: [total4, Turning1_Retract])\r\ntotal6 = union (tables: [total5, Turning2_Extend])\r\ntotal7 = union (tables: [total6, Turning2_Retract])\r\n\r\n\r\n|> map(fn: (r) => ({ AnomalyRatioMax_10N10: r._value }))\r\n|>max(column: \"AnomalyRatioMax_10N10\" )\r\n|>yield(name:\"total\" )",
+          "refId": "10N10"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "hide": false,
+          "query": "data = from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ActuatorOperTimes\" and r.StationName == \"10N11\" and r._field == \"Anomaly_ratio\")\r\n\r\n// find max value of anomaly ratio for actuator operation time\r\nGripper1_Extend = data |> filter(fn: (r) => r.DeviceName == \"Gripper1\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"Gripper1_Extend_max_anomaly_ratio\")\r\n\r\nGripper1_Retract = data |> filter(fn: (r) => r.DeviceName == \"Gripper1\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"Gripper1_Retract_max_anomaly_ratio\")\r\n\r\n\r\nGripper2_Extend = data |> filter(fn: (r) => r.DeviceName == \"Gripper2\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"Gripper2_Extend_max_anomaly_ratio\")\r\n\r\nGripper2_Retract = data |> filter(fn: (r) => r.DeviceName == \"Gripper2\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"Gripper2_Retract_max_anomaly_ratio\")\r\n\r\n\r\nSlideHor1_Extend = data |> filter(fn: (r) => r.DeviceName == \"SlideHor1\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"SlideHor1_Extend_max_anomaly_ratio\")\r\n\r\nSlideHor1_Retract = data |> filter(fn: (r) => r.DeviceName == \"SlideHor1\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"SlideHor1_Retract_max_anomaly_ratio\")\r\n\r\n\r\nSlideHor2_Extend = data |> filter(fn: (r) => r.DeviceName == \"SlideHor2\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"SlideHor2_Extend_max_anomaly_ratio\")\r\n\r\nSlideHor2_Retract = data |> filter(fn: (r) => r.DeviceName == \"SlideHor2\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"SlideHor2_Retract_max_anomaly_ratio\")\r\n\r\n\r\nSwivelUnit1_Extend = data |> filter(fn: (r) => r.DeviceName == \"SwivelUnit1\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"SwivelUnit1_Extend_max_anomaly_ratio\")\r\n\r\nSwivelUnit1_Retract = data |> filter(fn: (r) => r.DeviceName == \"SwivelUnit1\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"SwivelUnit1_Retract_max_anomaly_ratio\")\r\n\r\n\r\nSwivelUnit2_Extend = data |> filter(fn: (r) => r.DeviceName == \"SwivelUnit2\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"SwivelUnit2_Extend_max_anomaly_ratio\")\r\n\r\nSwivelUnit2_Retract = data |> filter(fn: (r) => r.DeviceName == \"SwivelUnit2\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"SwivelUnit2_Retract_max_anomaly_ratio\")\r\n\r\n\r\nSlideUnitVert_Extend  = data |> filter(fn: (r) => r.DeviceName == \"SlideUnitVert\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"SlideUnitVert_Extend_max_anomaly_ratio\")\r\n\r\nSlideUnitVert_Retract  = data |> filter(fn: (r) => r.DeviceName == \"SlideUnitVert\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"SlideUnitVert_Retract_max_anomaly_ratio\")\r\n\r\n\r\n// find max of all max values\r\ntotal1 = union (tables: [Gripper1_Extend, Gripper1_Retract])\r\ntotal2 = union (tables: [total1, Gripper2_Extend])\r\ntotal3 = union (tables: [total2, Gripper2_Retract])\r\ntotal4 = union (tables: [total3, SlideHor1_Extend])\r\ntotal5 = union (tables: [total4, SlideHor1_Retract])\r\ntotal6 = union (tables: [total5, SlideHor2_Extend])\r\ntotal7 = union (tables: [total6, SlideHor2_Retract])\r\ntotal8 = union (tables: [total7, SwivelUnit1_Extend])\r\ntotal9 = union (tables: [total8, SwivelUnit1_Retract])\r\ntotal10 = union (tables: [total9, SwivelUnit2_Extend])\r\ntotal11 = union (tables: [total10, SwivelUnit2_Retract])\r\ntotal12 = union (tables: [total11, SlideUnitVert_Extend])\r\ntotal13 = union (tables: [total12, SlideUnitVert_Retract])\r\n\r\n\r\n|> map(fn: (r) => ({ AnomalyRatioMax_10N11: r._value }))\r\n|>max(column: \"AnomalyRatioMax_10N11\" )\r\n|>yield(name:\"total\" )",
+          "refId": "10N11"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "hide": false,
+          "query": "data = from(bucket: \"PPSL1\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ActuatorOperTimes\" and r.StationName == \"10N31\" and r._field == \"Anomaly_ratio\")\r\n\r\n// find max value of anomaly ratio for actuator operation time\r\nSeparator1_Extend = data |> filter(fn: (r) => r.DeviceName == \"Separator1\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"Separator1_Extend_max_anomaly_ratio\")\r\n\r\nSeparator1_Retract = data |> filter(fn: (r) => r.DeviceName == \"Separator1\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"Separator1_Retract_max_anomaly_ratio\")\r\n\r\n\r\nSeparator2_Extend = data |> filter(fn: (r) => r.DeviceName == \"Separator2\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"Separator2_Extend_max_anomaly_ratio\")\r\n\r\nSeparator2_Retract = data |> filter(fn: (r) => r.DeviceName == \"Separator2\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"Separator2_Retract_max_anomaly_ratio\")\r\n\r\n\r\nLifting1_Extend  = data |> filter(fn: (r) => r.DeviceName == \"Lifting1\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"Lifting1_Extend_max_anomaly_ratio\")\r\n\r\nLifting1_Retract  = data |> filter(fn: (r) => r.DeviceName == \"Lifting1\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"Lifting1_Retract_max_anomaly_ratio\")\r\n\r\n\r\nLifting2_Extend  = data |> filter(fn: (r) => r.DeviceName == \"Lifting2\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"Lifting2_Extend_max_anomaly_ratio\")\r\n\r\nLifting2_Retract  = data |> filter(fn: (r) => r.DeviceName == \"Lifting2\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"Lifting2_Retract_max_anomaly_ratio\")\r\n\r\nTurning1_Extend  = data |> filter(fn: (r) => r.DeviceName == \"Turning1\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"Turning1_Extend_max_anomaly_ratio\")\r\n\r\nTurning1_Retract = data |> filter(fn: (r) => r.DeviceName == \"Turning1\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"Turning1_Retract_max_anomaly_ratio\")\r\n\r\n\r\nTurning2_Extend  = data |> filter(fn: (r) => r.DeviceName == \"Turning2\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"Turning2_Extend_max_anomaly_ratio\")\r\n\r\nTurning2_Retract = data |> filter(fn: (r) => r.DeviceName == \"Turning2\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"Turning2_Retract_max_anomaly_ratio\")\r\n\r\n\r\nHardStop1_Extend  = data |> filter(fn: (r) => r.DeviceName == \"HardStop1\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"HardStop1_Extend_max_anomaly_ratio\")\r\n\r\nHardStop1_Retract  = data |> filter(fn: (r) => r.DeviceName == \"HardStop1\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"HardStop1_Retract_max_anomaly_ratio\")\r\n\r\n\r\nHardStop2_Extend  = data |> filter(fn: (r) => r.DeviceName == \"HardStop2\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"HardStop2_Extend_max_anomaly_ratio\")\r\n\r\nHardStop2_Retract  = data |> filter(fn: (r) => r.DeviceName == \"HardStop2\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"HardStop2_Retract_max_anomaly_ratio\")\r\n\r\n\r\nSlideUnit1_Extend = data |> filter(fn: (r) => r.DeviceName == \"SlideUnit1\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"SlideUnit1_Extend_max_anomaly_ratio\")\r\n\r\nSlideUnit1_Retract = data |> filter(fn: (r) => r.DeviceName == \"SlideUnit1\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"SlideUnit1_Retract_max_anomaly_ratio\")\r\n\r\n\r\nSlideUnit2_Extend = data |> filter(fn: (r) => r.DeviceName == \"SlideUnit2\"  and r.OperationType ==\"Extend_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"SlideUnit2_Extend_max_anomaly_ratio\")\r\n\r\nSlideUnit2_Retract = data |> filter(fn: (r) => r.DeviceName == \"SlideUnit2\"  and r.OperationType ==\"Retract_T\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n  //|> yield(name: \"SlideUnit2_Retract_max_anomaly_ratio\")\r\n\r\n\r\n// find max of all max values\r\ntotal1 = union (tables: [Separator1_Extend, Separator1_Retract])\r\ntotal2 = union (tables: [total1, Separator2_Extend])\r\ntotal3 = union (tables: [total2, Separator2_Retract])\r\ntotal4 = union (tables: [total3, Lifting1_Extend])\r\ntotal5 = union (tables: [total4, Lifting1_Retract])\r\ntotal6 = union (tables: [total5, Lifting2_Extend])\r\ntotal7 = union (tables: [total6, Lifting2_Retract])\r\ntotal8 = union (tables: [total7, Turning1_Extend])\r\ntotal9 = union (tables: [total8, Turning1_Retract])\r\ntotal10 = union (tables: [total9, Turning2_Extend])\r\ntotal11 = union (tables: [total10, Turning2_Retract])\r\ntotal12 = union (tables: [total11, HardStop1_Extend])\r\ntotal13 = union (tables: [total12, HardStop1_Retract])\r\ntotal14 = union (tables: [total13, HardStop2_Extend])\r\ntotal15 = union (tables: [total14, HardStop2_Retract])\r\ntotal16 = union (tables: [total15, SlideUnit1_Extend])\r\ntotal17 = union (tables: [total16, SlideUnit1_Retract])\r\ntotal18 = union (tables: [total17, SlideUnit2_Extend])\r\ntotal19 = union (tables: [total18, SlideUnit2_Retract])\r\n\r\n|> map(fn: (r) => ({ AnomalyRatioMax_10N31: r._value }))\r\n|>max(column: \"AnomalyRatioMax_10N31\" )\r\n|>yield(name:\"total\" )",
+          "refId": "10N31"
+        }
+      ],
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_OI01-GLOBAL-INFLUX}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 12,
+        "y": 2
+      },
+      "id": 30,
+      "maxDataPoints": 10000000,
+      "options": {
+        "displayMode": "lcd",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "valueMode": "color"
+      },
+      "pluginVersion": "9.5.14",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "query": "data = from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ElectricalMeasurement\" and r.SensorName == \"BC1\" )\r\n\r\nBC1_MaxCurrInt_L1 = data |> filter(fn: (r) => r._field == \"L1_CurrIntegral_AnomalyRatio\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n\r\nBC1_MaxCurrInt_L2 = data |> filter(fn: (r) => r._field == \"L2_CurrIntegral_AnomalyRatio\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n\r\nBC1_MaxCurrInt_L3 = data |> filter(fn: (r) => r._field == \"L3_CurrIntegral_AnomalyRatio\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n\r\ntotal1 = union (tables: [BC1_MaxCurrInt_L1, BC1_MaxCurrInt_L2])\r\ntotal2 = union (tables: [total1, BC1_MaxCurrInt_L3])\r\n\r\n|>map(fn: (r) => ({ MaxAnomalyRatio_CurrentIntegral_BC1BC2BC3: r._value }))\r\n|>max(column: \"MaxAnomalyRatio_CurrentIntegral_BC1BC2BC3\")\r\n|>yield(name:\"total\")",
+          "refId": "A"
+        }
+      ],
+      "title": "BC1",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_OI01-GLOBAL-INFLUX}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 18,
+        "y": 2
+      },
+      "id": 31,
+      "maxDataPoints": 10000000,
+      "options": {
+        "displayMode": "lcd",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "valueMode": "color"
+      },
+      "pluginVersion": "9.5.14",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "query": "data = from(bucket: \"PPSL1\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ElectricalMeasurement\" and r.SensorName == \"BC1\" )\r\n\r\nBC1_MaxInrushCurr_L1 = data |> filter(fn: (r) => r._field == \"L1_InrushCurr_AnomalyRatio\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n\r\nBC1_MaxInrushCurr_L2 = data |> filter(fn: (r) => r._field == \"L2_InrushCurr_AnomalyRatio\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n\r\nBC1_MaxInrushCurr_L3 = data |> filter(fn: (r) => r._field == \"L3_InrushCurr_AnomalyRatio\")\r\n  |>max()\r\n  |>last()\r\n  |>map(fn: (r) => ({r with _value: r._value * 100.0}))\r\n\r\ntotal1 = union (tables: [BC1_MaxInrushCurr_L1, BC1_MaxInrushCurr_L2])\r\ntotal2 = union (tables: [total1, BC1_MaxInrushCurr_L3])\r\n\r\n|> map(fn: (r) => ({ MaxAnomalyRatio_InrushCurrent_BC1BC2BC3: r._value }))\r\n|> max(column: \"MaxAnomalyRatio_InrushCurrent_BC1BC2BC3\")\r\n|>yield(name:\"total\")",
+          "refId": "A"
+        }
+      ],
+      "title": "BC1",
+      "type": "bargauge"
+    },
+    {
+      "backgroundColor": "rgba(128,128,128,0.1)",
+      "colorMaps": [
+        {
+          "$$hashKey": "object:3845",
+          "color": "#37872D",
+          "text": "Auto"
+        },
+        {
+          "$$hashKey": "object:3848",
+          "color": "#1F60C4",
+          "text": "Manual"
+        },
+        {
+          "$$hashKey": "object:3851",
+          "color": "#E0B400",
+          "text": "yes"
+        },
+        {
+          "$$hashKey": "object:5064",
+          "color": "#E02F44",
+          "text": "no"
+        }
+      ],
+      "crosshairColor": "#8F070C",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_OI01-GLOBAL-INFLUX}"
+      },
+      "display": "timeline",
+      "expandFromQueryS": 0,
+      "extendLastValue": true,
+      "gridPos": {
+        "h": 6,
+        "w": 22,
+        "x": 0,
+        "y": 8
+      },
+      "highlightOnMouseover": false,
+      "id": 4,
+      "legendSortBy": "-ms",
+      "lineColor": "rgba(0,0,0,0.1)",
+      "maxDataPoints": 1000000,
+      "metricNameColor": "#000000",
+      "rangeMaps": [
+        {
+          "$$hashKey": "object:5753",
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "rowHeight": 50,
+      "showDistinctCount": false,
+      "showLegend": true,
+      "showLegendCounts": false,
+      "showLegendNames": true,
+      "showLegendPercent": true,
+      "showLegendTime": false,
+      "showLegendValues": true,
+      "showTimeAxis": true,
+      "showTransitionCount": false,
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "query": "AutoManState = from(bucket:\"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"MachineStatus\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"AutoMode\" )\r\n  |> map(fn: (r) => ({ r with _field: \"AutoManual\" }))\r\n  |> map(fn: (r) => ({ r with _value: if r._value == 1 \r\n                                                    then \"Auto\"\r\n                                                    else \"Manual\"\r\n                                                     }))\r\n  |> aggregateWindow(every: 10ms, fn: last, createEmpty: false)\r\n  |> yield(name: \"AutoMan\")\r\n\r\n",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "hide": false,
+          "query": "Producing = from(bucket: \"${Process_Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"MachineStatus\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"Producing\" )\r\n  |> map(fn: (r) => ({ r with _value: if r._value == 1 \r\n                                                    then \"yes\"\r\n                                                    else \"no\"\r\n                                                     }))\r\n  \r\n  |> map(fn: (r) => ({ r with _field: \"Producing\" }))\r\n  |> aggregateWindow(every: 10ms, fn: last, createEmpty: false)\r\n  |> yield(name: \"Producing\")\r\n\r\n\r\n\r\n",
+          "refId": "B"
+        }
+      ],
+      "textSize": 24,
+      "textSizeTime": 12,
+      "timeOptions": [
+        {
+          "name": "Years",
+          "value": "years"
+        },
+        {
+          "name": "Months",
+          "value": "months"
+        },
+        {
+          "name": "Weeks",
+          "value": "weeks"
+        },
+        {
+          "name": "Days",
+          "value": "days"
+        },
+        {
+          "name": "Hours",
+          "value": "hours"
+        },
+        {
+          "name": "Minutes",
+          "value": "minutes"
+        },
+        {
+          "name": "Seconds",
+          "value": "seconds"
+        },
+        {
+          "name": "Milliseconds",
+          "value": "milliseconds"
+        }
+      ],
+      "timePrecision": {
+        "name": "Minutes",
+        "value": "minutes"
+      },
+      "timeTextColor": "#d8d9da",
+      "title": "Machine Status",
+      "type": "natel-discrete-panel",
+      "units": "short",
+      "use12HourClock": false,
+      "useTimePrecision": false,
+      "valueMaps": [
+        {
+          "$$hashKey": "object:5751",
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueTextColor": "#000000",
+      "writeAllValues": false,
+      "writeLastValue": false,
+      "writeMetricNames": false
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_OI01-GLOBAL-INFLUX}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "displayName": "EtherCAT comm. (sensor network)",
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "index": 1,
+                  "text": "NOK"
+                },
+                "1": {
+                  "index": 0,
+                  "text": "OK"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "max": 2,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-red",
+                "value": null
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 0
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 22,
+        "y": 8
+      },
+      "id": 36,
+      "maxDataPoints": 10000,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {
+          "titleSize": 15,
+          "valueSize": 15
+        },
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "9.5.14",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"MachineStatus\" )\r\n  |> filter(fn: (r) => r[\"_field\"] == \"FieldbusOK\" )\r\n\r\n  |> aggregateWindow(every: 500ms, fn: last, createEmpty: false)\r\n  |> yield(name: \"result\")\r\n\r\n\r\n\r\n  ",
+          "refId": "A"
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_OI01-GLOBAL-INFLUX}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "displayName": "Work center PLC comm.",
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "index": 1,
+                  "text": "NOK"
+                },
+                "1": {
+                  "index": 0,
+                  "text": "OK"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "max": 2,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-red",
+                "value": null
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 0
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 22,
+        "y": 11
+      },
+      "id": 37,
+      "maxDataPoints": 10000,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {
+          "titleSize": 15,
+          "valueSize": 15
+        },
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "9.5.14",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "query": "from(bucket: \"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"MachineStatus\" )\r\n  |> filter(fn: (r) => r[\"_field\"] == \"MachineCommOK\" )\r\n\r\n  |> aggregateWindow(every: 500ms, fn: last, createEmpty: false)\r\n  |> yield(name: \"result\")\r\n\r\n\r\n\r\n  ",
+          "refId": "A"
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_OI01-GLOBAL-INFLUX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Humidity BM2"
+            },
+            "properties": [
+              {
+                "id": "custom.axisSoftMin",
+                "value": 0
+              },
+              {
+                "id": "custom.axisSoftMax",
+                "value": 100
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Temperature BM2"
+            },
+            "properties": [
+              {
+                "id": "custom.axisSoftMin",
+                "value": 0
+              },
+              {
+                "id": "custom.axisSoftMax",
+                "value": 60
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 14
+      },
+      "id": 6,
+      "maxDataPoints": 1000000,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "query": "from(bucket:\"${Process_Bucket}\" )\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"TempHumidSensor\" and r.SensorName == \"BM2\")\r\n  |> filter(fn: (r) => r._field == \"Humidity\" or r._field == \"Temperature\" )\r\n  |> aggregateWindow(every: 5s, fn: last, createEmpty: false)\r\n\r\n // |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Temperature / Humidity",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_OI01-GLOBAL-INFLUX}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 14
+      },
+      "id": 32,
+      "maxDataPoints": 10000000,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_OI01-GLOBAL-INFLUX}"
+          },
+          "query": "from(bucket:\"${Process_Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"DewPointSensor\" and r.SensorName == \"BT1\" )\r\n  |> filter(fn: (r) =>  r._field == \"Temperature\" )\r\n // |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Dew Point ",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "30s",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [
+    "PPSL1_Main"
+  ],
+  "templating": {
+    "list": [
+      {
+        "hide": 2,
+        "name": "Process_Bucket",
+        "query": "${VAR_PROCESS_BUCKET}",
+        "skipUrlSync": false,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_PROCESS_BUCKET}",
+          "text": "${VAR_PROCESS_BUCKET}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_PROCESS_BUCKET}",
+            "text": "${VAR_PROCESS_BUCKET}",
+            "selected": false
+          }
+        ]
+      }
+    ]
+  },
+  "time": {
+    "from": "now-3h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "PPS L1 - Main",
+  "uid": "jLgDKZh4k1c",
+  "version": 83,
+  "weekStart": ""
+}
